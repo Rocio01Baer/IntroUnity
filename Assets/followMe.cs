@@ -1,0 +1,30 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.AI;
+
+[RequireComponent (typeof (NavMeshAgent))]
+public class followMe : MonoBehaviour
+{
+
+    public Transform target;
+    Vector3 dest;
+    NavMeshAgent agente;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        agente = GetComponent<NavMeshAgent>();
+        dest = agente.destination;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if(Vector3.Distance(dest, target.position) > 1.0f)
+        {
+            dest = target.position;
+            agente.destination = dest;
+        }
+    }
+}
